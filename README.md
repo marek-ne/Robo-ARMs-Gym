@@ -1,4 +1,4 @@
-# SO-101 gym
+# Robo ARM(s) Gym
 
 A MuJoCo gym for the SO-101 arm, with three skills and a train gate.
 

@@ -3,7 +3,7 @@
 # Requires: gh auth, a user that can read the GPU, and nvidia-smi.
 set -euo pipefail
 
-REPO="${ROBOARM_RUNNER_REPO:-marek-ne/robo-arm-gym}"
+REPO="${ROBOARM_RUNNER_REPO:-marek-ne/Robo-ARMs-Gym}"
 NAME="${ROBOARM_RUNNER_NAME:-robo-arm-node-d}"
 DIR="${ROBOARM_RUNNER_DIR:-$HOME/actions-runner-robo-arm}"
 
