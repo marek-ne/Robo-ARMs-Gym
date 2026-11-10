@@ -1,0 +1,41 @@
+name: snyk
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Snyk
+        run: npm install -g snyk
+      - name: Snyk Open Source
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --file=requirements.txt --severity-threshold=high
+      - name: Snyk Code
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk code test --severity-threshold=high
+      - name: Receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json, os
+          json.dump(
+              {"status": "passed", "project": "robo-arm-gym", "commit": os.environ.get("GITHUB_SHA", "")},
+              open("snyk.json", "w"),
+          )
+          PY
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: snyk-receipt
+          path: snyk.json

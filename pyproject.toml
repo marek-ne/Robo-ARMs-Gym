@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robo-arm-gym"
+version = "0.1.0"
+description = "SO-101 MuJoCo gym with skill contracts and a governed train gate."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "mujoco>=3.2",
+  "numpy>=1.26",
+  "gymnasium>=0.29,<1.1",
+  "stable-baselines3>=2.3",
+  "tensorboard",
+  "pyyaml",
+]
+
+[tool.setuptools.packages.find]
+include = ["twin*", "skills*", "governance*", "platform*"]

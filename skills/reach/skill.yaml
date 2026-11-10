@@ -1,0 +1,25 @@
+skill: reach
+version: 0.1.0
+summary: Move end-effector to a random 3D target within 2 cm.
+task_spec:
+  observation: [joint_pos(6), joint_vel(6), ee_pos(3), target_pos(3), ee_to_target(1)]
+  action: joint_position_delta(5)
+  horizon_steps: 300
+preconditions:
+  robot: so101-12v
+  dof: 6
+  workspace_radius_m: 0.35
+  camera_required: false
+policy:
+  kind: sb3-ppo
+  base: null
+  checkpoint_uri: null
+eval_certificate:
+  min_success_rate: 0.80
+  min_episodes: 50
+  eval_id: null
+safety_envelope:
+  max_joint_vel_frac: 0.5
+  max_torque_frac: 0.5
+  estop: ctrl_c
+  geofence: workspace_radius_m

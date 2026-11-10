@@ -1,0 +1,16 @@
+<mujoco model="so101_reach_twin">
+  <include file="scene.xml"/>
+  <worldbody>
+    <!-- RGB marker: drag in the viewer (double-click, Ctrl-drag) or nudge with keys. -->
+    <body name="target" mocap="true" pos="0.20 0.00 0.18">
+      <geom name="target_sphere" type="sphere" size="0.012"
+            rgba="0.25 0.55 0.95 0.85" contype="0" conaffinity="0"/>
+      <geom name="target_x" type="capsule" fromto="-0.035 0 0 0.035 0 0" size="0.0035"
+            rgba="0.95 0.20 0.20 0.95" contype="0" conaffinity="0"/>
+      <geom name="target_y" type="capsule" fromto="0 -0.035 0 0 0.035 0" size="0.0035"
+            rgba="0.20 0.85 0.30 0.95" contype="0" conaffinity="0"/>
+      <geom name="target_z" type="capsule" fromto="0 0 -0.035 0 0 0.035" size="0.0035"
+            rgba="0.25 0.45 0.95 0.95" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,25 @@
+skill: place
+version: 0.1.0
+summary: Pick a block at pose A and set it down at pose B (within 2 cm after release).
+task_spec:
+  observation: [joint_pos(6), joint_vel(6), ee_pos(3), cube_pos(3), goal_pos(3), gripper_opening(1), cube_to_goal(1)]
+  action: joint_position_delta(6)
+  horizon_steps: 600
+preconditions:
+  robot: so101-12v
+  dof: 6
+  workspace_radius_m: 0.35
+  camera_required: false
+policy:
+  kind: sb3-ppo
+  base: null
+  checkpoint_uri: null
+eval_certificate:
+  min_success_rate: 0.80
+  min_episodes: 50
+  eval_id: null
+safety_envelope:
+  max_joint_vel_frac: 0.5
+  max_torque_frac: 0.5
+  estop: ctrl_c
+  geofence: workspace_radius_m

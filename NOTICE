@@ -1,0 +1,9 @@
+robo-arm-gym
+Copyright (c) 2026 Marek
+
+This project's code is under the MIT License. See LICENSE.
+
+The SO-101 URDF, MJCF, and meshes under urdf/so101/ come from
+TheRobotStudio/SO-ARM100, commit a758567c3978dfeefe282ede0500085a48fe8f78.
+Those files stay under the Apache License, Version 2.0.
+The license text is third_party/LICENSE-SO-ARM100.txt.

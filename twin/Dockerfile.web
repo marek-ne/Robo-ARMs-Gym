@@ -1,0 +1,17 @@
+# Browser classroom for the CPU twin. Public host: robo-twin.fimpo.net
+FROM python:3.11-slim-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libegl1 libgl1 libgomp1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir \
+        "mujoco>=3.2" "numpy>=1.26" "pillow>=10" pyyaml
+
+WORKDIR /workspace
+ENV PYTHONPATH=/workspace
+ENV MUJOCO_GL=egl
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8092
+CMD ["python", "-m", "twin", "web", "--skill", "barrier", "--host", "0.0.0.0", "--port", "8092"]

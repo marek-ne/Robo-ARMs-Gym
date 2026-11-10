@@ -1,0 +1,57 @@
+# Dependencies
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training outputs (large files). Policy zips under policies/ are the
+# contributor-facing artifact and stay trackable.
+*.zip
+!policies/**/*.zip
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.trt
+
+# Runtime catalogs, demos, and twin runs
+.cache/
+
+# Data directories (created at runtime)
+lerobot/datasets/
+monitoring/logs/
+checkpoints/
+datasets/
+logs/
+
+# Isaac Sim cache
+_isaac_sim/
+.isaac_sim/
+
+# Docker
+.docker/
+
+# Generated USD files (large, regenerated from URDF)
+urdf/*.usd
+urdf/*.usda
+urdf/*.usdc
+urdf/meshes/*.usd

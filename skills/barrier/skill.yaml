@@ -1,0 +1,48 @@
+skill: barrier
+version: 0.1.0
+summary: Pick the can at A, lift it clear of the fence, set it down on pad B. Any
+  contact with the fence fails the episode.
+task_spec:
+  observation:
+  - joint_pos(6)
+  - joint_vel(6)
+  - ee_pos(3)
+  - block_pos(3)
+  - goal_pos(3)
+  - gripper_opening(1)
+  - block_to_goal(1)
+  - wall_pos(3)
+  - wall_size(3)
+  action: joint_position_delta(6)
+  horizon_steps: 600
+  randomised_per_episode:
+  - fence_height
+  - fence_distance
+  - block_start
+  - goal_pad
+success:
+  block_within_m: 0.02
+  block_resting_on_table: true
+  jaw_open: true
+failure:
+- fence_contact
+- block_off_table
+- horizon_exceeded
+preconditions:
+  robot: so101-12v
+  dof: 6
+  workspace_radius_m: 0.35
+  camera_required: false
+policy:
+  kind: scripted
+  base: null
+  checkpoint_uri: twin:scripted
+eval_certificate:
+  min_success_rate: 0.8
+  min_episodes: 50
+  eval_id: eval-2026-08-31T110554.379836-0000
+safety_envelope:
+  max_joint_vel_frac: 0.5
+  max_torque_frac: 0.5
+  estop: ctrl_c
+  geofence: workspace_radius_m

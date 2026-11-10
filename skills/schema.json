@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "skills/schema.json",
+  "title": "Robo-arm skill manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "skill",
+    "version",
+    "summary",
+    "task_spec",
+    "preconditions",
+    "policy",
+    "eval_certificate",
+    "safety_envelope"
+  ],
+  "properties": {
+    "skill": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+([.-][A-Za-z0-9]+)*$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gym": {
+      "type": "string",
+      "enum": ["reach", "place", "barrier"],
+      "description": "Which built-in twin this skill trains. Defaults to the skill name when that name is a gym."
+    },
+    "task_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation", "action", "horizon_steps"],
+      "properties": {
+        "observation": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*\\([0-9]+\\)$"
+          }
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "horizon_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "randomised_per_episode": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "success": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "failure": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "preconditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["robot", "dof", "workspace_radius_m", "camera_required"],
+      "properties": {
+        "robot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dof": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "workspace_radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "camera_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "base", "checkpoint_uri"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["scripted", "sb3-ppo", "sb3-sac", "lerobot-act", "vla-lora"]
+        },
+        "base": {
+          "type": ["string", "null"]
+        },
+        "checkpoint_uri": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "eval_certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_success_rate", "min_episodes", "eval_id"],
+      "properties": {
+        "min_success_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "min_episodes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "eval_id": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "safety_envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_joint_vel_frac",
+        "max_torque_frac",
+        "estop",
+        "geofence"
+      ],
+      "properties": {
+        "max_joint_vel_frac": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_torque_frac": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "estop": {
+          "type": "string",
+          "minLength": 1
+        },
+        "geofence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

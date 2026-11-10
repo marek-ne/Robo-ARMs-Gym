@@ -1,0 +1,55 @@
+<mujoco model="so101_barrier_twin">
+  <include file="scene.xml"/>
+  <!-- impratio and noslip are what make a grasp hold: at the default
+       impratio=1 the block slides out from between the blades. -->
+  <option impratio="50" noslip_iterations="5"/>
+  <worldbody>
+    <!-- Pulled back so the whole arm is in frame. Zoom in the classroom to get closer. -->
+    <camera name="classroom" pos="0.04 -0.72 0.50" fovy="52"
+            mode="targetbody" target="table"/>
+    <!-- Near edge at x=0.12. Any closer and the table clips the shoulder,
+         which silently jams the pan joint against a contact. -->
+    <body name="table" pos="0.26 0 0.01">
+      <geom name="table_top" type="box" size="0.14 0.16 0.01"
+            rgba="0.42 0.36 0.30 1" friction="1.4 0.08 0.01"/>
+    </body>
+    <body name="pad_a" pos="0.16 0 0.021">
+      <geom name="pad_a_geom" type="cylinder" size="0.028 0.001"
+            rgba="0.15 0.65 0.30 0.45" contype="0" conaffinity="0"/>
+    </body>
+    <!-- Amber, not red: the fence is red, and on video the goal must not look
+         like the obstacle. -->
+    <body name="pad_b" pos="0.30 0 0.021">
+      <geom name="pad_b_geom" type="cylinder" size="0.028 0.001"
+            rgba="0.95 0.62 0.10 0.55" contype="0" conaffinity="0"/>
+    </body>
+    <!-- The fence. Spans the table sideways, so the block goes over, not around.
+         reset() rewrites body_pos and geom_size to vary height and distance. -->
+    <body name="wall" pos="0.23 0 0.042">
+      <!-- Deliberately not the arm's yellow: on video the fence has to read as
+           the thing being cleared, not as part of the robot. -->
+      <geom name="wall_geom" type="box" size="0.006 0.15 0.022"
+            rgba="0.72 0.16 0.14 1" friction="1.0 0.05 0.01"/>
+    </body>
+    <!-- A round can, not a cube: the blades tolerate under 3 degrees of yaw
+         error on a flat face, and a cylinder has no yaw to get wrong. -->
+    <body name="cube" pos="0.16 0 0.036">
+      <freejoint name="cube_free"/>
+      <inertial pos="0 0 0" mass="0.030" diaginertia="6e-6 6e-6 4e-6"/>
+      <geom name="cube_geom" type="cylinder" size="0.012 0.016"
+            rgba="0.18 0.42 0.82 1" friction="1.8 0.12 0.01"
+            condim="4" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+    </body>
+    <!-- Same RGB handle as reach/place. The arm's claw follows this marker. -->
+    <body name="ee_goal" mocap="true" pos="0.16 0 0.14">
+      <geom name="ee_goal_sphere" type="sphere" size="0.012"
+            rgba="0.25 0.55 0.95 0.85" contype="0" conaffinity="0"/>
+      <geom name="ee_goal_x" type="capsule" fromto="-0.035 0 0 0.035 0 0" size="0.0035"
+            rgba="0.95 0.20 0.20 0.95" contype="0" conaffinity="0"/>
+      <geom name="ee_goal_y" type="capsule" fromto="0 -0.035 0 0 0.035 0" size="0.0035"
+            rgba="0.20 0.85 0.30 0.95" contype="0" conaffinity="0"/>
+      <geom name="ee_goal_z" type="capsule" fromto="0 0 -0.035 0 0 0.035" size="0.0035"
+            rgba="0.25 0.45 0.95 0.95" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+</mujoco>
