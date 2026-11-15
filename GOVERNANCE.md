@@ -5,7 +5,7 @@ A contribution is a skill contract. This repository's runner is the referee. It 
 ```
 pull request
   -> diff is only a skill manifest, a reward, or a policy zip
-  -> Snyk Open Source and Snyk Code pass
+  -> Snyk Open Source passes
   -> one job for this GitHub user in the last 7 days
   -> LiteLLM probe answers as robo-arm-gpu-probe (no cloud fallback)
   -> nvidia-smi shows the card free of vLLM and at least 8 GiB free

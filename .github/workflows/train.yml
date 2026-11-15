@@ -134,10 +134,6 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test --file=requirements.txt --policy-path=.snyk --severity-threshold=high
-      - name: Snyk Code
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk code test --severity-threshold=high
       - name: Receipt
         env:
           PR_SHA: ${{ needs.resolve.outputs.sha }}

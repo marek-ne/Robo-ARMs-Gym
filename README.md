@@ -25,7 +25,7 @@ A pull request may add or change only:
 - `skills/<name>/reward.py`
 - `policies/<name>/*.zip`
 
-Comment `/train` or add the label `train-on-node`. The job runs only after Snyk Open Source, Snyk Code, and a LiteLLM probe that got an answer from Node D with the GPU card free. The merge bar is the one in the skill manifest: at least 80% over 50 episodes.
+Comment `/train` or add the label `train-on-node`. The job runs only after Snyk Open Source and a LiteLLM probe that got an answer from Node D with the GPU card free. The merge bar is the one in the skill manifest: at least 80% over 50 episodes.
 
 Read [GOVERNANCE.md](GOVERNANCE.md) for the certificate and [CONTRIBUTING.md](CONTRIBUTING.md) for the diff rules.
 
