@@ -133,7 +133,7 @@ jobs:
       - name: Snyk Open Source
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk test --file=requirements.txt --severity-threshold=high
+        run: snyk test --file=requirements.txt --policy-path=.snyk --severity-threshold=high
       - name: Snyk Code
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

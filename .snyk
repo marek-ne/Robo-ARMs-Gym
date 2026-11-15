@@ -1,0 +1,8 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore:
+  SNYK-PYTHON-TORCH-15746467:
+    - '*':
+        reason: No fixed torch release. This gym does not load .pt2 files. Checkpoints are Stable-Baselines3 zips from the project runner.
+        expires: 2027-02-13T00:00:00.000Z
+        created: 2026-11-15T06:14:00.000Z
