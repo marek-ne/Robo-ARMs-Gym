@@ -7,3 +7,9 @@ The SO-101 URDF, MJCF, and meshes under urdf/so101/ come from
 TheRobotStudio/SO-ARM100, commit a758567c3978dfeefe282ede0500085a48fe8f78.
 Those files stay under the Apache License, Version 2.0.
 The license text is third_party/LICENSE-SO-ARM100.txt.
+
+The AlohaMini2 URDF and meshes under urdf/alohamini2/ come from
+liyiteng/AlohaMini, commit 17c6a98d79881a45ab869c1f392ed89c0723a298.
+Those files stay under the Apache License, Version 2.0.
+The license text is urdf/alohamini2/LICENSE-AlohaMini.txt.
+Dense STL files were stride-decimated so MuJoCo can load them.

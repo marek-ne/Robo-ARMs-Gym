@@ -11,7 +11,7 @@ from typing import Any
 
 import yaml
 
-GYMS = ("reach", "place", "barrier")
+GYMS = ("reach", "place", "barrier", "aloha-reach")
 
 _ALLOWED = (
     re.compile(r"^skills/[a-z][a-z0-9_-]+/skill\.yaml$"),

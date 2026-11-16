@@ -1,0 +1,8 @@
+AlohaMini2 URDF and meshes
+https://github.com/liyiteng/AlohaMini
+commit 17c6a98d79881a45ab869c1f392ed89c0723a298
+license: Apache-2.0 (LICENSE-AlohaMini.txt)
+
+Path: AlohaMini2/urdf/alohamini2
+STL files with more than 180000 triangles were stride-decimated so MuJoCo can load them.
+The reach gym locks the base, the lift, the right arm, and the left gripper.

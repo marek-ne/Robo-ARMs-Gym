@@ -30,7 +30,11 @@ def make_twin(skill: str, seed: int = 0):
         from twin.reach_env import ReachTwin
 
         return ReachTwin(seed=seed)
-    raise ValueError(f"unknown skill {skill!r} (use reach, place or barrier)")
+    if skill == "aloha-reach":
+        from twin.aloha_mini2 import AlohaMini2Reach
+
+        return AlohaMini2Reach(seed=seed)
+    raise ValueError(f"unknown skill {skill!r} (use reach, place, barrier, or aloha-reach)")
 
 
 class TwinGym(gym.Env):

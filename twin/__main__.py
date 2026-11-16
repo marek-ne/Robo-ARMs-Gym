@@ -65,7 +65,7 @@ def _heartbeat(device_id: str, env, skill: str) -> None:
     print(json.dumps({"heartbeat_error": str(last_exc), "device": device_id}), flush=True)
 
 
-SKILLS = ("reach", "place", "barrier")
+SKILLS = ("reach", "place", "barrier", "aloha-reach")
 
 
 def _make_env(skill: str, seed: int):
@@ -77,6 +77,10 @@ def _make_env(skill: str, seed: int):
         from twin.place_env import PlaceTwin
 
         return PlaceTwin(seed=seed)
+    if skill == "aloha-reach":
+        from twin.aloha_mini2 import AlohaMini2Reach
+
+        return AlohaMini2Reach(seed=seed)
     from twin.reach_env import ReachTwin
 
     return ReachTwin(seed=seed)
@@ -109,6 +113,12 @@ def _policy_action(env, skill: str, policy: str, model=None):
 
         if policy in {"scripted", "jacobian"}:
             return scripted_place_action(env)
+        return env.rng.uniform(-1.0, 1.0, size=6)
+    if skill == "aloha-reach":
+        from twin.aloha_mini2 import scripted_aloha_action
+
+        if policy in {"scripted", "jacobian"}:
+            return scripted_aloha_action(env)
         return env.rng.uniform(-1.0, 1.0, size=6)
     from twin.control import jacobian_p_action
 

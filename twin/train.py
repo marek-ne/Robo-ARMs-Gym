@@ -37,7 +37,7 @@ def train(
 
     from twin.gym_env import TwinGym
 
-    if skill not in {"reach", "place", "barrier"}:
+    if skill not in {"reach", "place", "barrier", "aloha-reach"}:
         raise ValueError(skill)
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")

@@ -30,7 +30,7 @@
     },
     "gym": {
       "type": "string",
-      "enum": ["reach", "place", "barrier"],
+      "enum": ["reach", "place", "barrier", "aloha-reach"],
       "description": "Which built-in twin this skill trains. Defaults to the skill name when that name is a gym."
     },
     "task_spec": {
